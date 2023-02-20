@@ -95,26 +95,39 @@
                                     <outlet property="delegate" destination="Woi-QJ-wM5" id="0C9-rf-aJC"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0R-De-8Mi">
-                                <rect key="frame" x="174" y="412" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EbK-Hc-SQg">
+                                <rect key="frame" x="0.0" y="397" width="390" height="413"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0R-De-8Mi">
+                                        <rect key="frame" x="174" y="20" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Q0R-De-8Mi" firstAttribute="top" secondItem="EbK-Hc-SQg" secondAttribute="top" constant="20" id="aDn-AH-hFK"/>
+                                    <constraint firstItem="Q0R-De-8Mi" firstAttribute="centerX" secondItem="EbK-Hc-SQg" secondAttribute="centerX" id="kRA-RA-hGR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="R2g-zj-A1a"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Q0R-De-8Mi" firstAttribute="top" secondItem="VKf-4x-4dj" secondAttribute="bottom" constant="15" id="BQz-Aw-ZVA"/>
+                            <constraint firstItem="R2g-zj-A1a" firstAttribute="bottom" secondItem="EbK-Hc-SQg" secondAttribute="bottom" id="Rcf-oi-H4b"/>
+                            <constraint firstItem="EbK-Hc-SQg" firstAttribute="top" secondItem="VKf-4x-4dj" secondAttribute="bottom" id="Zlz-Bw-5GQ"/>
+                            <constraint firstItem="EbK-Hc-SQg" firstAttribute="leading" secondItem="R2g-zj-A1a" secondAttribute="leading" id="kIT-hJ-BH7"/>
                             <constraint firstItem="R2g-zj-A1a" firstAttribute="trailing" secondItem="VKf-4x-4dj" secondAttribute="trailing" id="ocX-qK-I6Y"/>
-                            <constraint firstItem="Q0R-De-8Mi" firstAttribute="centerX" secondItem="2tU-L8-lRm" secondAttribute="centerX" id="q2I-sh-CNi"/>
                             <constraint firstItem="VKf-4x-4dj" firstAttribute="leading" secondItem="R2g-zj-A1a" secondAttribute="leading" id="tBf-oS-gvb"/>
                             <constraint firstItem="VKf-4x-4dj" firstAttribute="top" secondItem="R2g-zj-A1a" secondAttribute="top" id="vWB-ec-Io1"/>
+                            <constraint firstItem="R2g-zj-A1a" firstAttribute="trailing" secondItem="EbK-Hc-SQg" secondAttribute="trailing" id="zTc-hK-CXa"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cityTitle" destination="Q0R-De-8Mi" id="8uq-Ux-Hut"/>
                         <outlet property="collectionView" destination="VKf-4x-4dj" id="Kka-Ku-ZaZ"/>
+                        <outlet property="descriptionLayout" destination="EbK-Hc-SQg" id="feB-Gf-1kJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b7o-my-ypd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

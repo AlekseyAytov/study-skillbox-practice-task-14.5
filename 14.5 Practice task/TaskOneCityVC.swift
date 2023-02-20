@@ -13,6 +13,10 @@ class TaskOneCityVC: UIViewController {
     
     @IBOutlet weak var cityTitle: UILabel!
     
+    @IBOutlet weak var descriptionLayout: UIView!
+    
+    var chosenCountry: String!
+    
     // переменная, содержащая индекс видимого элемента collectionView
     var indexPathsForVisibleCell: IndexPath!
     
@@ -21,8 +25,11 @@ class TaskOneCityVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Constants.Colors.blue
+        self.view.backgroundColor = Constants.Colors.darkBlue
         collectionView.backgroundColor = Constants.Colors.blue
+        descriptionLayout.backgroundColor = Constants.Colors.blue
+        
+        self.navigationItem.title = chosenCountry
  
         // 1. получение значение типа UINib, соответствующее xib-файлу кастомой ячейки
         let cellTypeNib = UINib(nibName: "TaskOneCityCell", bundle: nil)
@@ -38,19 +45,7 @@ class TaskOneCityVC: UIViewController {
         cityTitle.font = Constants.Fonts.u30Bold
         cityTitle.text = cityData[0].title
         
-        // вместо переопределения flowLayout возможно использование методов UICollectionViewDelegateFlowLayout
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize.width = UIScreen.main.bounds.width - 10
-        flowLayout.itemSize.height = collectionView.bounds.height
-        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 10
-
-        self.collectionView.collectionViewLayout = flowLayout
-        self.collectionView.isPagingEnabled = true
-        self.collectionView.showsHorizontalScrollIndicator = false
-        
+        setupCollectionView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,6 +55,21 @@ class TaskOneCityVC: UIViewController {
             indexPathsForVisibleCell = iPath
             print("First inicialisation of indexPathsForVisibleCell")
         }
+    }
+    
+    func setupCollectionView() {
+        // вместо переопределения flowLayout возможно использование методов UICollectionViewDelegateFlowLayout
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize.width = UIScreen.main.bounds.width - 10
+        flowLayout.itemSize.height = collectionView.bounds.height
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumLineSpacing = 10
+        
+        self.collectionView.collectionViewLayout = flowLayout
+        self.collectionView.isPagingEnabled = true
+        self.collectionView.showsHorizontalScrollIndicator = false
     }
     
 
@@ -97,6 +107,9 @@ extension TaskOneCityVC: UICollectionViewDataSource {
 }
 
 // MARK: UICollectionViewDelegate
+
+
+3
 
 extension TaskOneCityVC: UICollectionViewDelegate {
     

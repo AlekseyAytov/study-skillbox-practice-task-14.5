@@ -21,14 +21,15 @@ class TaskOneViewController: UIViewController {
         tableView.backgroundColor = Constants.Colors.blue
         self.view.backgroundColor = Constants.Colors.darkBlue
         
+        // настройка tabbar
         setupTabBarAppearance()
-
+        // настройка NavigationController
+        setupNavigationController()
+        
         // 1. получение значение типа UINib, соответствующее xib-файлу кастомой ячейки
         let cellTypeNib = UINib(nibName: "TaskOneCell", bundle: nil)
         // 2. регистрация кастомной ячейки в табличном представлении
         self.tableView.register(cellTypeNib, forCellReuseIdentifier: "Cell")
-        
-        
     }
     
     // исключение смены цвета tabbar при скролле до самого низа
@@ -41,10 +42,23 @@ class TaskOneViewController: UIViewController {
         self.tabBarController?.tabBar.standardAppearance = appearance
         self.tabBarController?.tabBar.scrollEdgeAppearance = appearance
         
-        UITabBar.appearance().tintColor = Constants.Colors.lightBlue
+        self.tabBarController?.tabBar.tintColor = Constants.Colors.lightBlue
     }
-
-
+    
+    func setupNavigationController() {
+        let barAppearance = UINavigationBarAppearance()
+        // настройка внешенего вида без прозрачности
+        barAppearance.backgroundColor = Constants.Colors.darkBlue
+        
+        navigationItem.standardAppearance = barAppearance
+        navigationItem.scrollEdgeAppearance = barAppearance
+        
+        self.navigationController?.navigationBar.tintColor = Constants.Colors.lightBlue
+        self.navigationController?.navigationBar.backgroundColor = Constants.Colors.darkBlue
+        self.navigationItem.title = "Task 1"
+        self.navigationItem.backButtonTitle = "Back"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Constants.Fonts.u24Regular!]
+    }
 }
 
 // MARK: UITableViewDataSource
@@ -60,7 +74,6 @@ extension TaskOneViewController: UITableViewDataSource {
         cell.countryImage.image = UIImage(named: taskOneData[indexPath.item].imageName)
         cell.countryName.text = taskOneData[indexPath.item].title
         cell.changeHeightConstarint()
-        cell.backgroundColor = Constants.Colors.blue
         return cell
     }
 }
@@ -70,6 +83,7 @@ extension TaskOneViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboardInstance = UIStoryboard(name: "Main", bundle: nil)
         let taskOneCityVC = storyboardInstance.instantiateViewController(withIdentifier: "taskOneCityVC") as! TaskOneCityVC
+        taskOneCityVC.chosenCountry = taskOneData[indexPath.item].title
         taskOneCityVC.cityData = taskOneData[indexPath.item].cities
         self.navigationController?.pushViewController(taskOneCityVC, animated: true)
     }

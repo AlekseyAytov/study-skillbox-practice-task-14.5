@@ -27,8 +27,8 @@ enum Constants {
             UIFont(name: "Ubuntu-Medium", size: 30 )
         }
         
-        static var ui30Regular: UIFont? {
-            UIFont(name: "Inter-Regular", size: 30 )
+        static var u24Regular: UIFont? {
+            UIFont(name: "Ubuntu-Regular", size: 24 )
         }
         
         static var ui16Semi: UIFont? {

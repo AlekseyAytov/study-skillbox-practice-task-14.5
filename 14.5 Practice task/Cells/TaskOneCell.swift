@@ -17,13 +17,18 @@ class TaskOneCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        countryImage.contentMode = .scaleAspectFit
         self.accessoryType = .disclosureIndicator
+        
+        countryImage.contentMode = .scaleAspectFit
         countryImage.layer.borderWidth = 1
         countryImage.layer.cornerRadius = 5
         countryImage.layer.borderColor = Constants.Colors.darkBlue.cgColor
         
         countryName.font = Constants.Fonts.u16Medium
+    }
+    
+    override func prepareForReuse() {
+        countryImage = nil
     }
 
 //    override func setSelected(_ selected: Bool, animated: Bool) {
@@ -41,7 +46,4 @@ class TaskOneCell: UITableViewCell {
         let heightСonstant = (currentWidth/aspectR).rounded()
         NSLayoutConstraint(item: countryImage!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: heightСonstant).isActive = true
     }
-    
-    
-    
 }

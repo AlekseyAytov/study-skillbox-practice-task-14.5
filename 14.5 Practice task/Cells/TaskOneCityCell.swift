@@ -15,10 +15,11 @@ class TaskOneCityCell: UICollectionViewCell {
         super.awakeFromNib()
         
         cityImage.contentMode = .scaleAspectFit
-        
-
+        self.backgroundColor = Constants.Colors.blue
     }
     
+    override func prepareForReuse() {
+        cityImage = nil
+    }
     
-
 }
