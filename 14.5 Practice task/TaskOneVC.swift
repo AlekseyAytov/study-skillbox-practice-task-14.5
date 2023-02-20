@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TaskOneViewController: UIViewController {
+class TaskOneVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -63,7 +63,7 @@ class TaskOneViewController: UIViewController {
 
 // MARK: UITableViewDataSource
 
-extension TaskOneViewController: UITableViewDataSource {
+extension TaskOneVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         taskOneData.count
@@ -79,7 +79,7 @@ extension TaskOneViewController: UITableViewDataSource {
 }
 
 
-extension TaskOneViewController: UITableViewDelegate {
+extension TaskOneVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboardInstance = UIStoryboard(name: "Main", bundle: nil)
         let taskOneCityVC = storyboardInstance.instantiateViewController(withIdentifier: "taskOneCityVC") as! TaskOneCityVC

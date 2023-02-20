@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TaskThreeViewController: UIViewController {
+class TaskTwoVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
