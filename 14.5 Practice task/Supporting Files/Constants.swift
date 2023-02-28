@@ -59,45 +59,9 @@ enum Constants {
             UIFont(name: "Inter-Regular", size: 10 )
         }
     }
-}
-
-let countryNames: [String: [String]] = [
-    "Austria": ["Innsbruck", "Linz", "Salzburg", "Vienna"],
-    "Belgium": ["Antwerp", "Brussels", "Ghent", "Leuven"],
-    "Kazakhstan": ["Aktau", "Almaty", "Astana"],
-    "France": ["Lyon", "Marseille", "Nice", "Paris"],
-    "Russia": ["Moscow", "Kazan", "Novosibirsk", "Vladivostok", "Yekaterinburg"],
-    "Germany": ["Berlin", "Hamburg", "Munich"],
-    "Greece": ["Athens", "Patras", "Thessaloniki"],
-]
-
-
-struct City {
-    var title: String
-    var imageName: String
-    var description: String
-}
-
-struct Country {
-    var title: String
-    var imageName: String
-    var cities: [City]
-}
-
-class TaskOneData {
-
-    func loadData() -> [Country] {
-        var elements: [Country] = []
-        for item in countryNames {
-            elements.append( Country(
-                title: item.key,
-                imageName: item.key,
-                cities: item.value.map {
-                    City(title: $0,
-                         imageName: $0,
-                         description: $0)
-                }))
-        }
-        return elements
+    
+    enum DateFormat {
+        static var forSection = "dd-MM-yyyy"
+        static var forCell = "dd-MM-yyyy HH:mm"
     }
 }

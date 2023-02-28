@@ -18,6 +18,7 @@ class TaskOneCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.accessoryType = .disclosureIndicator
+        self.backgroundColor = Constants.Colors.blue
         
         countryImage.contentMode = .scaleAspectFit
         countryImage.layer.borderWidth = 1
@@ -27,9 +28,9 @@ class TaskOneCell: UITableViewCell {
         countryName.font = Constants.Fonts.u16Medium
     }
     
-    override func prepareForReuse() {
-        countryImage = nil
-    }
+//    override func prepareForReuse() {
+//        countryImage = nil
+//    }
 
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)

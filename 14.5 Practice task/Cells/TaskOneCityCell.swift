@@ -17,9 +17,9 @@ class TaskOneCityCell: UICollectionViewCell {
         cityImage.contentMode = .scaleAspectFit
         self.backgroundColor = Constants.Colors.blue
     }
-    
-    override func prepareForReuse() {
-        cityImage = nil
-    }
+
+//    override func prepareForReuse() {
+//        cityImage = nil
+//    }
     
 }

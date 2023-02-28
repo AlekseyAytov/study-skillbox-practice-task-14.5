@@ -8,10 +8,41 @@
 import UIKit
 
 class TaskTwoTableVC: UITableViewController {
+    
+    var taskTwoData: [String: [NewsRecords]]! {
+        didSet {
+            // сортировка списка статей по дате
+            for (key, newsRecords) in taskTwoData {
+                taskTwoData[key] = newsRecords.sorted {
+                    $0.publishedAt < $1.publishedAt
+                }
+            }
+        }
+    }
+    
+    // форматтер для вывода даты в ячейках
+    var formatter: DateFormatter = {
+        var formatter = DateFormatter()
+        formatter.timeZone = .current
+        formatter.locale = .current
+        formatter.dateFormat = Constants.DateFormat.forCell
+        return formatter
+    }()
+    // данные для секций, ключи словаря taskTwoData
+    var sectionsData: [String]! {
+        didSet {
+            sectionsData.sort {
+                // сортировка строк
+                $0.toDate(.custom(Constants.DateFormat.forSection))! < $1.toDate(.custom(Constants.DateFormat.forSection))!
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        taskTwoData = TaskTwoData().loadData()
+        sectionsData = Array(taskTwoData.keys)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -23,23 +54,35 @@ class TaskTwoTableVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return sectionsData.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        let sectionDate = sectionsData[section]
+        return taskTwoData[sectionDate]?.count ?? 0
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsRecordCell", for: indexPath)
+        let sectionDate = sectionsData[indexPath.section]
+        if let titleLabel = cell.viewWithTag(1) as? UILabel {
+            titleLabel.text = taskTwoData[sectionDate]![indexPath.row].title
+        }
+        if let dateLabel = cell.viewWithTag(2) as? UILabel {
+            dateLabel.text = formatter.string(from: taskTwoData[sectionDate]![indexPath.row].publishedAt)
+        }
 
-        // Configure the cell...
-
+        cell.backgroundColor = .white
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "SECTION TITLE: \(sectionsData[section])"
+    }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.

@@ -57,7 +57,7 @@ class TaskOneCityVC: UIViewController {
         }
     }
     
-    func setupCollectionView() {
+    private func setupCollectionView() {
         // вместо переопределения flowLayout возможно использование методов UICollectionViewDelegateFlowLayout
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize.width = UIScreen.main.bounds.width - 10
@@ -67,9 +67,9 @@ class TaskOneCityVC: UIViewController {
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 10
         
-        self.collectionView.collectionViewLayout = flowLayout
-        self.collectionView.isPagingEnabled = true
-        self.collectionView.showsHorizontalScrollIndicator = false
+        collectionView.collectionViewLayout = flowLayout
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
     }
     
 
@@ -107,9 +107,6 @@ extension TaskOneCityVC: UICollectionViewDataSource {
 }
 
 // MARK: UICollectionViewDelegate
-
-
-3
 
 extension TaskOneCityVC: UICollectionViewDelegate {
     

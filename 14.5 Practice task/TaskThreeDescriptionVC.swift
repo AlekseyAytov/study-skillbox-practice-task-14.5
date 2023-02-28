@@ -8,11 +8,17 @@
 import UIKit
 
 class TaskThreeDescriptionVC: UIViewController {
+    
+    var descriptionText: String!
+    var locationText: String!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        descriptionLabel.text = descriptionText
+        locationLabel.text = locationText
     }
     
 

@@ -10,7 +10,7 @@ import UIKit
 class TaskOneVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
+    // данные по заданию
     var taskOneData: [Country] = []
 
     override func viewDidLoad() {
@@ -19,12 +19,12 @@ class TaskOneVC: UIViewController {
         taskOneData = TaskOneData().loadData()
         tableView.separatorStyle = .none
         tableView.backgroundColor = Constants.Colors.blue
-        self.view.backgroundColor = Constants.Colors.darkBlue
+        view.backgroundColor = Constants.Colors.darkBlue
         
         // настройка tabbar
         setupTabBarAppearance()
-        // настройка NavigationController
-        setupNavigationController()
+        // настройка NavigationBar
+        setupNavigationBar()
         
         // 1. получение значение типа UINib, соответствующее xib-файлу кастомой ячейки
         let cellTypeNib = UINib(nibName: "TaskOneCell", bundle: nil)
@@ -32,32 +32,49 @@ class TaskOneVC: UIViewController {
         self.tableView.register(cellTypeNib, forCellReuseIdentifier: "Cell")
     }
     
-    // исключение смены цвета tabbar при скролле до самого низа
-    func setupTabBarAppearance() {
-        let appearance = UITabBarAppearance()
-        // настройка внешенего вида без прозрачности
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = Constants.Colors.darkBlue
+    private func setupTabBarAppearance() {
+          // настройка внешенего вида через UITabBarAppearance
+//        let appearance = UITabBarAppearance()
+//        appearance.configureWithOpaqueBackground()
+//        appearance.backgroundColor = Constants.Colors.darkBlue
+//        self.tabBarController?.tabBar.standardAppearance = appearance
+//        self.tabBarController?.tabBar.scrollEdgeAppearance = appearance
         
-        self.tabBarController?.tabBar.standardAppearance = appearance
-        self.tabBarController?.tabBar.scrollEdgeAppearance = appearance
+        tabBarController?.tabBar.tintColor = Constants.Colors.lightBlue
+        tabBarController?.tabBar.isTranslucent = true
+        tabBarController?.tabBar.shadowImage = UIImage()
+        tabBarController?.tabBar.backgroundImage = UIImage()
+        tabBarController?.tabBar.itemPositioning = .centered
         
-        self.tabBarController?.tabBar.tintColor = Constants.Colors.lightBlue
+        // добавление обводки вокруг иконок
+        let shapeLayer = CAShapeLayer()
+        // фиксированная ширина и высота
+        let width = 300
+        let height = 57
+        // вычисление позиции по оси Х
+        let positionX = (Int((tabBarController?.tabBar.bounds.width)!) - width) / 2
+        // рисуем прямоугольник, используя класс UIBezierPath
+        let path = UIBezierPath(
+            roundedRect: CGRect(x: positionX, y: 0, width: width, height: height),
+            byRoundingCorners: [.bottomLeft, .bottomRight],
+            cornerRadii: CGSize(width: 17, height: 0)
+        )
+        shapeLayer.path = path.cgPath
+        shapeLayer.fillColor = Constants.Colors.blue.cgColor
+        // добавлеяем shapeLayer в низ иерархии layer
+        tabBarController?.tabBar.layer.insertSublayer(shapeLayer, at: 0)
     }
     
-    func setupNavigationController() {
-        let barAppearance = UINavigationBarAppearance()
-        // настройка внешенего вида без прозрачности
-        barAppearance.backgroundColor = Constants.Colors.darkBlue
+    private func setupNavigationBar() {
+        // делаем navigationBar прозрачным
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        // делаем прозрачной тонкую полоску ниже navigationBar
+        navigationController?.navigationBar.shadowImage = UIImage()
         
-        navigationItem.standardAppearance = barAppearance
-        navigationItem.scrollEdgeAppearance = barAppearance
-        
-        self.navigationController?.navigationBar.tintColor = Constants.Colors.lightBlue
-        self.navigationController?.navigationBar.backgroundColor = Constants.Colors.darkBlue
-        self.navigationItem.title = "Task 1"
-        self.navigationItem.backButtonTitle = "Back"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Constants.Fonts.u24Regular!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Constants.Fonts.u24Regular!]
+        navigationController?.navigationBar.tintColor = Constants.Colors.lightBlue
+        navigationItem.title = "Task 1"
+        navigationItem.backButtonTitle = "To main"
     }
 }
 
@@ -78,6 +95,7 @@ extension TaskOneVC: UITableViewDataSource {
     }
 }
 
+// MARK: UITableViewDelegate
 
 extension TaskOneVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
