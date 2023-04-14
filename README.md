@@ -1,1 +1,1 @@
-![](ScreenRecord.gif)
+![Screen record](ScreenRecord.gif)
